@@ -1,12 +1,44 @@
-import React from 'react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
 import KittenCard from './KittenCard';
+import { getRandomKittens } from '@/services';
 
 const GameBoard = () => {
-	const kittensArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+	const [numOfKittens, setNumOfKittens] = useState(6);
+	const [kittens, setKittens] = useState([]);
+	const [cardOne, setCardOne] = useState();
+	const [cardTwo, setCardTwo] = useState();
+	const [solvedKittensArray, setSolvedKittensArray] = useState([]);
+
+	// Function to fetch kittens
+	const fetchKittens = async () => {
+		const response = await getRandomKittens(numOfKittens);
+		if (response.isError) {
+			alert(response.error);
+		} else {
+			console.log('API Reponse:', response.images);
+			setKittens(response.images);
+		}
+	};
+
+	useEffect(() => {
+		fetchKittens();
+	}, []);
+
 	return (
 		<div className="flex flex-wrap flex-row gap-4 w-full justify-center">
-			{kittensArray.map((num) => (
-				<KittenCard number={num} />
+			{kittens.map((kitten) => (
+				<KittenCard
+					key={kitten?.id}
+					kitten={kitten}
+					cardOne={cardOne}
+					setCardOne={setCardOne}
+					cardTwo={cardTwo}
+					setCardTwo={setCardTwo}
+					solvedKittensArray={solvedKittensArray}
+					setSolvedKittensArray={setSolvedKittensArray}
+				/>
 			))}
 		</div>
 	);
