@@ -8,6 +8,7 @@ const KittenCard = ({
 	setCardTwo,
 	solvedKittensArray,
 	setSolvedKittensArray,
+	gameWin,
 }) => {
 	const handleClick = () => {
 		if (cardOne === null) {
@@ -26,7 +27,9 @@ const KittenCard = ({
 		<button
 			onClick={handleClick}
 			disabled={cardOne && cardTwo}
-			className="flex h-80 w-80 items-center justify-center bg-secondary rounded-lg overflow-clip"
+			className={`flex h-80 w-80 items-center justify-center bg-secondary rounded-lg overflow-clip ${
+				gameWin && 'animate-spin'
+			}`}
 		>
 			<p
 				className={`${

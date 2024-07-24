@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 export default function Home() {
 	const [kitten, setKitten] = useState(
-		'https://cdn2.thecatapi.com/images/MTQ5NzQ2MA.jpg'
+		'https://cdn2.thecatapi.com/images/dfp.jpg'
 	);
 	return (
 		<main className="flex min-h-screen items-center justify-center bg-base-100 overflow-x-clip">
